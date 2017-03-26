@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-include '../bayesian_inference.php';
-
 use PHPUnit\Framework\TestCase;
 
-final class bayesian_inference_Test extends TestCase
+final class BayesianInference_getPosteriorProbabilityTest extends TestCase
 {
     /*
         We have a deck of cards. We know top card is 'face' card. What's probablity it's king?
@@ -16,7 +14,7 @@ final class bayesian_inference_Test extends TestCase
         $pe = 3/13;     // P(Face)
 
         // P(King|Face)
-        $phe = get_posterior_probability($peh, $ph, $pe);
+        $phe = BayesianInference::getPosteriorProbability($peh, $ph, $pe);
 
         $this->assertEquals(1/3, $phe);
     }
@@ -30,7 +28,7 @@ final class bayesian_inference_Test extends TestCase
         $pe = 150/200;  // P(Gold)
 
         // P(King|Face)
-        $phe = get_posterior_probability($peh, $ph, $pe);
+        $phe =  BayesianInference::getPosteriorProbability($peh, $ph, $pe);
 
         $this->assertEquals(2/3, $phe);
     }
@@ -46,7 +44,7 @@ final class bayesian_inference_Test extends TestCase
         $pe = 0;        // P(E)
 
         // following call is expected to throw InvalidArgumentException
-        $phe = get_posterior_probability($peh, $ph, $pe);
+        $phe =  BayesianInference::getPosteriorProbability($peh, $ph, $pe);
     }
 
     /*
@@ -60,7 +58,7 @@ final class bayesian_inference_Test extends TestCase
         $pe = 0.5;      // P(E)
 
         // following call is expected to throw InvalidArgumentException
-        $phe = get_posterior_probability($peh, $ph, $pe);
+        $phe =  BayesianInference::getPosteriorProbability($peh, $ph, $pe);
     }
 
     /*
@@ -74,7 +72,7 @@ final class bayesian_inference_Test extends TestCase
         $pe = 0.2;      // P(E)
 
         // following call is expected to throw InvalidArgumentException
-        $phe = get_posterior_probability($peh, $ph, $pe);
+        $phe =  BayesianInference::getPosteriorProbability($peh, $ph, $pe);
     }
 }
 ?>

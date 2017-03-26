@@ -1,1 +1,1 @@
-php phpunit.phar --bootstrap bayesian_inference.php --testdox tests
+php phpunit.phar --bootstrap BayesianInference.php --testdox tests
