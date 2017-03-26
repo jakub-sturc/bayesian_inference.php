@@ -36,7 +36,7 @@ final class bayesian_inference_Test extends TestCase
     }
 
     /*
-        If P(E) is 0, whole calulation doesn't really make sence. We can't reconcile evidence of something impossible.
+        If P(E) = 0, whole calulation doesn't really make sence.
     */
     public function testIfMarginalLikehoodZeroThanThrow() : void {
         $this->expectException(InvalidArgumentException::class);
@@ -45,7 +45,35 @@ final class bayesian_inference_Test extends TestCase
         $ph = 1/2;      // P(H)
         $pe = 0;        // P(E)
 
-        // P(H|E)
+        // following call is expected to throw InvalidArgumentException
+        $phe = get_posterior_probability($peh, $ph, $pe);
+    }
+
+    /*
+        If P(H) > 1, whole calulation doesn't really make sence.
+    */
+    public function testIfPriorProbabilityIsAboveOneThanThrow() : void {
+        $this->expectException(InvalidArgumentException::class);
+
+        $peh = 3/5;     // P(E|H)
+        $ph = 1.1;      // P(H)
+        $pe = 0.5;      // P(E)
+
+        // following call is expected to throw InvalidArgumentException
+        $phe = get_posterior_probability($peh, $ph, $pe);
+    }
+
+    /*
+        If P(E|H) < 0, whole calulation doesn't really make sence.
+    */
+    public function testIfProbabilityIsBelowZeroThanThrow() : void {
+        $this->expectException(InvalidArgumentException::class);
+
+        $peh = -1;      // P(E|H)
+        $ph = 0.1;      // P(H)
+        $pe = 0.2;      // P(E)
+
+        // following call is expected to throw InvalidArgumentException
         $phe = get_posterior_probability($peh, $ph, $pe);
     }
 }

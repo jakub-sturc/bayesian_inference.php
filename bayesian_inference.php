@@ -9,8 +9,20 @@
     P(E), $pe, is the marginal likelihood.
 */
 function get_posterior_probability($peh, $ph, $pe) {
-    if ($pe == 0) {
-        throw new InvalidArgumentException('Marginal likehood impossible ($pe is zero)');
+    if ($peh < 0) {
+        throw new InvalidArgumentException('$peh less than zero');
+    } else if ($peh > 1) {
+        throw new InvalidArgumentException('$peh more than one');
+    } else if ($ph < 0) {
+        throw new InvalidArgumentException('$ph less than zero');
+    } else if ($ph > 1) {
+        throw new InvalidArgumentException('$ph more than one');
+    } else if ($pe < 0) {
+        throw new InvalidArgumentException('$pe less than zero');
+    } else if ($pe == 0) {
+        throw new InvalidArgumentException('$pe is zero');
+    } else if ($pe > 1) {
+        throw new InvalidArgumentException('$pe more than one');
     }
 
     return $peh * $ph / $pe;
