@@ -1,4 +1,5 @@
 <?php
+
 /*
     P(H|E) = P(E|H) * P(H) / P(E)
 
@@ -8,6 +9,10 @@
     P(E), $pe, is the marginal likelihood.
 */
 function get_posterior_probability($peh, $ph, $pe) {
+    if ($pe == 0) {
+        throw new InvalidArgumentException('Marginal likehood impossible ($pe is zero)');
+    }
+
     return $peh * $ph / $pe;
 }
 
